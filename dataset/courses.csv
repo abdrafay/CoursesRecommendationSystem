@@ -1,0 +1,31 @@
+CourseID,CourseName,Chain,Semester Offer,CreditHours,Course type,Course Description
+CL1000,Introduction to Information and Communication Technology,No,1,1,Programming,"This course introduces students to the fundamentals of information technology, covering topics such as computer systems, networks, software applications, and their societal impacts."
+CL1002,Programming Fundamentals - Lab,No,1,1,Programming,"A practical lab-based course accompanying the Programming Fundamentals lecture, where students apply theoretical concepts through hands-on coding exercises."
+CS1002,Programming Fundamentals,No,1,3,Programming,"This course covers the foundational concepts of programming, including syntax, control structures, data types, and algorithm development."
+MT1003,Calculus and Analytical Geometry,No,1,3,Mathematics,"Students learn fundamental concepts of calculus such as limits, derivatives, integrals, and analytical geometry, providing essential mathematical tools for various fields, including computer science."
+MT1004,Linear Algebra,No,1,3,Mathematics,"This course explores the theory and applications of linear algebra, including vector spaces, matrices, determinants, eigenvalues, and eigenvectors."
+SL1004,English Composition and Comprehension - Lab,No,1,1,Language,A practical course focusing on enhancing English writing and comprehension skills through exercises and assignments.
+SS1003,Pakistan Studies,No,1,3,Social,"This course provides an overview of Pakistan's history, culture, geography, politics, and socio-economic development."
+SS1004,English Composition and Comprehension,No,1,2,Language,A course aimed at developing students' proficiency in written and verbal communication in English.
+CL1004,Object Oriented Programming - Lab,CL1002,2,1,Programming,"A hands-on lab accompanying the Object Oriented Programming lecture, where students implement object-oriented concepts in programming assignments."
+CS1004,Object Oriented Programming,CS1004,2,3,Programming,"This course teaches the principles of object-oriented programming, including classes, objects, inheritance, polymorphism, and encapsulation."
+EE1005,Digital Logic Design,No,2,3,Programming,Students learn the fundamentals of digital logic circuits and design techniques used in building digital systems.
+EL1005,Digital Logic Design - Lab,,2,1,Programming,"A practical lab-based course accompanying the Digital Logic Design lecture, where students design and implement digital circuits."
+SL1008,Communication and Presentation Skills - Lab,,2,1,Language,A practical course focusing on improving students' oral communication and presentation skills through practice sessions.
+SS1002,Islamic Studies/Ethics,,2,3,Social,"This course explores Islamic principles, ethics, values, and their relevance to personal and professional life."
+SS1008,Communication and Presentation Skills,,2,2,Language,"The course on Communication and Presentation Skills focuses on developing students' abilities to effectively convey ideas, information, and messages in various professional and personal contexts. "
+MT1006,Differential Equations,MT1003,2,3,Mathematics,"Students learn techniques for solving ordinary and partial differential equations, which are essential in modeling various phenomena in science and engineering."
+AI2001,Programming for AI,,3,3,Programming,This course focuses on programming techniques and algorithms used in artificial intelligence applications.
+AL2001,Programming for AI - Lab,,3,1,Programming,"A practical lab-based course accompanying the Programming for AI lecture, where students implement AI algorithms and techniques in programming assignments."
+CL2001,Data Structures - Lab,,3,1,Programming,"A practical lab-based course accompanying the Data Structures lecture, where students implement and analyze various data structures."
+CS1005,Discrete Structures,,3,3,Mathematics,"This course covers fundamental topics in discrete mathematics, including sets, relations, functions, combinatorics, and graph theory."
+CS2001,Data Structures,,3,3,Programming,"Students learn about fundamental data structures such as arrays, linked lists, stacks, queues, trees, and graphs, along with algorithms for their manipulation and analysis."
+MT2005,Probability and Statistics,,3,3,Mathematics,This course introduces students to probability theory and statistical methods used in data analysis and decision making.
+SS2003,Psychology,,3,3,Social,"An introductory course covering basic principles and theories of psychology, including cognitive, behavioral, and social psychology."
+AI2002,Artificial Intelligence,,4,3,Programming,"This course delves deeper into the principles, algorithms, and applications of artificial intelligence, including machine learning, neural networks, natural language processing, and robotics."
+AL2002,Artificial Intelligence - Lab,,4,1,Programming,"A practical lab-based course accompanying the Artificial Intelligence lecture, where students implement AI algorithms and applications."
+CL2006,Operating Systems - Lab,,4,1,Programming,"A practical lab-based course accompanying the Operating Systems lecture, where students work with operating system concepts through hands-on exercises and projects."
+CS2004,Fundamentals of Software Engineering,,4,3,Theory,"This course covers principles, methodologies, and techniques used in software engineering, including requirements engineering, software design, testing, and project management."
+CS2006,Operating Systems,,4,3,Programming,"Students learn about the structure, components, and functionalities of operating systems, including process management, memory management, file systems, and concurrency."
+EE2003,Computer Organization and Assembly Language,,4,3,Programming,"This course covers the organization and architecture of computer systems, including CPU structure, memory hierarchy, and instruction set architecture, along with programming in assembly language."
+EL2003,Computer Organization and Assembly Language - Lab,,4,1,Programming,"A practical lab-based course accompanying the Computer Organization and Assembly Language lecture, where students gain hands-on experience with computer organization concepts and assembly language programming."
