@@ -1,4 +1,4 @@
-CourseID,CourseName,Chain,Semester Offer,CreditHours,Course type,Course Description
+CourseID,CourseName,Chain,Semester Offer,CreditHours,Category,Course Description
 CL1000,Introduction to Information and Communication Technology,No,1,1,Programming,"This course introduces students to the fundamentals of information technology, covering topics such as computer systems, networks, software applications, and their societal impacts."
 CL1002,Programming Fundamentals - Lab,No,1,1,Programming,"A practical lab-based course accompanying the Programming Fundamentals lecture, where students apply theoretical concepts through hands-on coding exercises."
 CS1002,Programming Fundamentals,No,1,3,Programming,"This course covers the foundational concepts of programming, including syntax, control structures, data types, and algorithm development."
