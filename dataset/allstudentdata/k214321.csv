@@ -1,4 +1,4 @@
-CourseID,StudentID,CourseName,GPA,Semester Offer,CreditHours,Repeat Status,CourseTaken,Type
+CourseID,StudentID,CourseName,GPA,Semester Offer,CreditHour,Repeat Status,CourseTaken,Type
 CL1000,21k-4321,Introduction to Information and Communication Technology,3.00,1,1,0,Fall,Core
 CL1002,21k-4321,Programming Fundamentals - Lab,3.33,1,1,0,Fall,Core
 CS1002,21k-4321,Programming Fundamentals,3.67,1,3,0,Fall,Core
