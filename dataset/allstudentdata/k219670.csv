@@ -1,0 +1,8 @@
+CourseID,StudentID,CourseName,GPA,Semester Offer,CreditHour,Repeat Status,CourseTaken,Type
+CL1000,21k-9670,Introduction to Information and Communication Technology,3,1,1,0,Fall,Core
+CL1002,21k-9670,Programming Fundamentals - Lab,4,1,1,0,Fall,Core
+CS1002,21k-9670,Programming Fundamentals,2.67,1,3,0,Fall,Core
+MT1003,21k-9670,Calculus and Analytical Geometry,0,1,3,0,Fall,Core
+MT1004,21k-9670,Linear Algebra,0,1,3,0,Fall,Core
+SL1004,21k-9670,English Composition and Comprehension - Lab,1.67,1,1,0,Fall,Core
+SS1004,21k-9670,Pakistan Studies,2,1,3,0,Fall,Core
