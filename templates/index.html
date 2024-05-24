@@ -4,34 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Course Planner</title>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Include Bootstrap CSS for styling (optional) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Student Course Planner</h1>
         <form action="/process" method="POST" enctype="multipart/form-data">
+            <!-- Your existing form fields -->
             <div class="form-group">
                 <label for="student_id">Enter Student ID:</label>
                 <input type="text" class="form-control" id="student_id" name="student_id" required>
             </div>
             <div class="form-group">
-                <label for="warning_status">Warning Status:</label>
-                <input type="text" class="form-control" id="warning_status" name="warning_status" required>
-            </div>
-            <div class="form-group">
-                <label for="cgpa">CGPA:</label>
-                <input type="number" step="0.01" class="form-control" id="cgpa" name="cgpa" required>
+                <label for="transcript">Upload Transcript:</label>
+                <input type="file" class="form-control-file" id="transcript" name="transcript" required>
             </div>
             <div class="form-group">
                 <label for="current_semester">Current Semester:</label>
                 <input type="number" class="form-control" id="current_semester" name="current_semester" required>
             </div>
             <div class="form-group">
-                <label for="transcript">Upload Transcript:</label>
-                <input type="file" class="form-control-file" id="transcript" name="transcript" required>
+                <label for="level_of_understanding">Level of Understanding:</label>
+                <!-- Add the "multiple" attribute for multi-select -->
+                <select class="form-control select2" id="level_of_understanding" name="level_of_understanding[]" multiple>
+                    <option value="Programming">Programming</option>
+                    <option value="Social">Social</option>
+                    <option value="Language">Language</option>
+                    <!-- Add more options as needed -->
+                </select>
             </div>
+            <div class="form-group">
+                <label for="preferences">Preferences:</label>
+                <!-- Use the "select2" class to enable Select2 -->
+                <select class="form-control select2" id="preferences" name="preferences[]" multiple>
+                    {% for course_name in course_names %}
+                    <option value="{{ course_name }}">{{ course_name }}</option>
+                    {% endfor %}
+                </select>
+                
+            </div>
+            <!-- Your existing form fields -->
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
     </div>
+
+    <!-- Include jQuery (required by Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        // Initialize Select2 for preferences
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 </body>
 </html>

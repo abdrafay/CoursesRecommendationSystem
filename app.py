@@ -185,6 +185,75 @@ def getTranscript(student_id, all_transcripts):
             return transcript.courses_taken
     return []
 
+def knowledge_based_filtering(student, available_courses, student_transcript):
+    recommendations = []
+    taken_courses = student_transcript.courses_taken
+    taken_course_ids = [course.course_id for course in taken_courses]
+
+    for course in available_courses:
+        score = 0
+        if course.category in student.level_of_understanding:
+            score += 10
+        if course.name in student.preferences:
+            score += 5
+        if course.course_id in taken_course_ids:
+            for taken_course in taken_courses:
+                if taken_course.course_id == course.course_id and taken_course.grade < 2.0 and taken_course.credit_hours > 1:
+                    score += 30        
+        prerequisites_met = all(prerequisite in taken_course_ids for prerequisite in course.chain_courses)
+        if prerequisites_met and course.course_id not in taken_course_ids:
+            score += 15
+
+        recommendations.append((course, score))
+    
+    recommendations.sort(key=lambda x: x[1], reverse=True)
+    return [(course, score) for course, score in recommendations]
+
+def rank_combinations_by_knowledge(student, combinations, student_transcript):
+    ranked_combinations = []
+    for combo, new_gpa in combinations:
+        total_score = 0
+        for course in combo:
+            filtered_courses = [course]
+            filtered_recommendations = knowledge_based_filtering(student, filtered_courses, student_transcript)
+            if filtered_recommendations:
+                total_score += filtered_recommendations[0][1]
+        ranked_combinations.append((combo, new_gpa, total_score))
+    
+    ranked_combinations.sort(key=lambda x: x[2], reverse=True)
+    return ranked_combinations
+
+def select_top_recommendations(ranked_combinations):
+    selected_recommendations = []
+    
+    five_courses_combos = [combo for combo in ranked_combinations if len(combo[0]) == 5]
+    four_courses_combos = [combo for combo in ranked_combinations if len(combo[0]) == 4]
+    three_courses_combos = [combo for combo in ranked_combinations if len(combo[0]) == 3]
+    two_courses_combos = [combo for combo in ranked_combinations if len(combo[0]) == 2]
+
+    if five_courses_combos:
+        selected_recommendations.append(five_courses_combos[0])
+    if four_courses_combos:
+        selected_recommendations.append(four_courses_combos[0])
+    if three_courses_combos:
+        selected_recommendations.append(three_courses_combos[0])
+    if two_courses_combos:
+        selected_recommendations.append(two_courses_combos[0])
+    
+    # Ensure at least 3 recommendations
+    if len(selected_recommendations) < 3:
+        all_combos = two_courses_combos[1:] + three_courses_combos[1:] + four_courses_combos[1:] + five_courses_combos[1:]
+        for combo in all_combos:
+            if len(selected_recommendations) < 3:
+                selected_recommendations.append(combo)
+
+    # Ensure unique recommendations
+    unique_selected_recommendations = []
+    for rec in selected_recommendations:
+        if rec not in unique_selected_recommendations:
+            unique_selected_recommendations.append(rec)
+
+    return unique_selected_recommendations[:3]  # Ensure only 3 recommendations
 def find_combinations_to_clear_warning(student,student_df, available_courses, student_transcript):
     # taken_courses = get_courses_taken(student.student_id, transcripts)
     taken_courses = student_transcript.courses_taken
@@ -269,9 +338,28 @@ def find_combinations_to_clear_warning(student,student_df, available_courses, st
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+def getAvailableCourses():
+    student_df1, course_df = load_data()
+    available_courses = []
+    total_courses = len(course_df)
+    num_random_courses = 10 
+    random_indices = [16, 17, 18, 19, 20, 21, 22]
+
+    for index in random_indices:
+        row = course_df.iloc[index]
+        chain_courses = []
+        
+        if not row.empty:
+            chain_courses = [row['Chain']] if not pd.isnull(row['Chain']) else []
+        course = Course(row['CourseID'], row['CourseName'], row['Category'], chain_courses, 0, row['Semester Offer'], row['CreditHours'], 0)
+        available_courses.append(course)
+    return available_courses
+
 @app.route('/')
 def home():
-    return render_template('index.html')
+    available_courses = getAvailableCourses()
+    course_names = [course.name for course in available_courses]
+    return render_template('index.html', course_names=course_names)
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -285,6 +373,9 @@ def process():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
+        level_of_understanding = request.form.getlist('level_of_understanding')
+        preferences = request.form.getlist('preferences')
+
         student_id = request.form['student_id']
         student_df = pd.read_csv(filepath)
         gpa = calculate_current_cgpa(student_df)
@@ -310,26 +401,16 @@ def process():
             courses_taken.append(course)
 
         student_transcript = Transcript(student_id, courses_taken)
-        student.level_of_understanding = ['Programming', 'Social', 'Language']
-        student.preferences = []
+        student.level_of_understanding =level_of_understanding
+        student.preferences = preferences
 
-        available_courses = []
-        total_courses = len(course_df)
-        num_random_courses = 10 
-        random_indices = [16, 17, 18, 19, 20, 21, 22]
-
-        for index in random_indices:
-            row = course_df.iloc[index]
-            chain_courses = []
-            
-            if not row.empty:
-                chain_courses = [row['Chain']] if not pd.isnull(row['Chain']) else []
-            course = Course(row['CourseID'], row['CourseName'], row['Category'], chain_courses, 0, row['Semester Offer'], row['CreditHours'], 0)
-            available_courses.append(course)
+        available_courses = getAvailableCourses()
 
         successful_combinations = find_combinations_to_clear_warning(student,student_df, available_courses, student_transcript)
+        ranked_combinations = rank_combinations_by_knowledge(student, successful_combinations, student_transcript)
+        top_recommendations = select_top_recommendations(ranked_combinations)
 
-        return render_template('results.html', student=student, available_courses=available_courses, successful_combinations=successful_combinations)
+        return render_template('results.html', student=student, available_courses=available_courses, successful_combinations=top_recommendations)
 
     return redirect(request.url)
 

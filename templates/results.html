@@ -18,7 +18,7 @@
         </ul>
         
         <h3 class="mt-4">Successful Combinations to Clear Warning (CGPA > 2.0): {{ successful_combinations|length }}</h3>
-        {% for combo, new_gpa in successful_combinations %}
+        {% for combo, new_gpa, total_score in successful_combinations %}
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">New CGPA: {{ new_gpa }}</h5>
