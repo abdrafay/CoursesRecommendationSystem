@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Results for Student ID: {{ student.student_id }}</h1>
+        
+        <h3>Available Courses:</h3>
+        <ul class="list-group">
+            {% for course in available_courses %}
+                <li class="list-group-item">{{ course.course_id }} - {{ course.name }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h3 class="mt-4">Successful Combinations to Clear Warning (CGPA > 2.0): {{ successful_combinations|length }}</h3>
+        {% for combo, new_gpa in successful_combinations %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">New CGPA: {{ new_gpa }}</h5>
+                    <p class="card-text">
+                        Courses:
+                        <ul>
+                            {% for course in combo %}
+                                <li>{{ course.course_id }} - {{ course.name }} (Grade: {{ course.grade }})</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
