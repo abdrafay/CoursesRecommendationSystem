@@ -4,35 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Tailwind CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Results for Student ID: {{ student.student_id }}</h1>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10 max-w-3xl">
+        <h1 class="text-center text-3xl font-bold text-gray-700 mb-10">Results for Student ID: {{ student.student_id }}</h1>
         
-        <h3>Available Courses:</h3>
-        <ul class="list-group">
-            {% for course in available_courses %}
-                <li class="list-group-item">{{ course.course_id }} - {{ course.name }}</li>
-            {% endfor %}
-        </ul>
-        
-        <h3 class="mt-4">Successful Combinations to Clear Warning (CGPA > 2.0): {{ successful_combinations|length }}</h3>
-        {% for combo, new_gpa, total_score in successful_combinations %}
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h5 class="card-title">New CGPA: {{ new_gpa }}</h5>
-                    <p class="card-text">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Available Courses:</h3>
+            <ul class="list-disc list-inside">
+                {% for course in available_courses %}
+                    <li class="mb-2 text-gray-700">{{ course.course_id }} - {{ course.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-lg mt-6">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Successful Combinations to Clear Warning (CGPA > 2.0): {{ successful_combinations|length }}</h3>
+            {% for combo, new_gpa, total_score in successful_combinations %}
+                <div class="bg-gray-50 p-4 rounded-lg shadow-md mt-4">
+                    <h5 class="text-xl font-bold text-gray-700">New CGPA: {{ new_gpa }}</h5>
+                    <p class="text-gray-700 mt-2">
                         Courses:
-                        <ul>
+                        <ul class="list-disc list-inside mt-2">
                             {% for course in combo %}
                                 <li>{{ course.course_id }} - {{ course.name }} (Grade: {{ course.grade }})</li>
                             {% endfor %}
                         </ul>
                     </p>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

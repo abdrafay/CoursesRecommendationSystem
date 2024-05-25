@@ -292,7 +292,7 @@ def find_combinations_to_clear_warning(student,student_df, available_courses, st
             for course in new_courses:
                 # Estimate GPA for new courses based on category average
                 estimated_grade = category_weighted_avg_gpa.get(course.category, 0)
-                course.grade = estimated_grade
+                course.grade = round(estimated_grade, 3)
             # combined_courses = list(set(taken_courses)) + new_courses
             # for combined_course in combined_courses:
             #     print(combined_course.name)
@@ -329,7 +329,9 @@ def find_combinations_to_clear_warning(student,student_df, available_courses, st
             new_gpa = calculate_gpa(combined_courses)
             
             if new_gpa >= required_gpa:
-                new_gpa = "{:.2f}".format(new_gpa)
+                # round to 2 decimal places
+                new_gpa = round(new_gpa, 2)
+                
                 successful_combinations.append((new_courses, new_gpa))
 
     return successful_combinations

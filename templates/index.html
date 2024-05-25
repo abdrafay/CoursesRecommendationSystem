@@ -6,48 +6,51 @@
     <title>Student Course Planner</title>
     <!-- Include Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- Include Bootstrap CSS for styling (optional) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Tailwind CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">Student Course Planner</h1>
-        <form action="/process" method="POST" enctype="multipart/form-data">
-            <!-- Your existing form fields -->
-            <div class="form-group">
-                <label for="student_id">Enter Student ID:</label>
-                <input type="text" class="form-control" id="student_id" name="student_id" required>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10 max-w-xl">
+        <h1 class="text-center text-3xl font-bold text-gray-700 mb-10">Student Course Planner</h1>
+        <form action="/process" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-lg shadow-lg">
+            <!-- Student ID Field -->
+            <div class="mb-6">
+                <label for="student_id" class="block text-gray-700 font-medium mb-2">Enter Student ID:</label>
+                <input type="text" class="border border-gray-300 p-2 rounded w-full" id="student_id" name="student_id" required>
             </div>
-            <div class="form-group">
-                <label for="transcript">Upload Transcript:</label>
-                <input type="file" class="form-control-file" id="transcript" name="transcript" required>
+            <!-- Transcript Upload Field -->
+            <div class="mb-6">
+                <label for="transcript" class="block text-gray-700 font-medium mb-2">Upload Transcript:</label>
+                <input type="file" class="border border-gray-300 p-2 rounded w-full" id="transcript" name="transcript" required>
             </div>
-            <div class="form-group">
-                <label for="current_semester">Current Semester:</label>
-                <input type="number" class="form-control" id="current_semester" name="current_semester" required>
+            <!-- Current Semester Field -->
+            <div class="mb-6">
+                <label for="current_semester" class="block text-gray-700 font-medium mb-2">Current Semester:</label>
+                <input type="number" class="border border-gray-300 p-2 rounded w-full" id="current_semester" name="current_semester" required>
             </div>
-            <div class="form-group">
-                <label for="level_of_understanding">Level of Understanding:</label>
-                <!-- Add the "multiple" attribute for multi-select -->
-                <select class="form-control select2" id="level_of_understanding" name="level_of_understanding[]" multiple>
+            <!-- Level of Understanding Field -->
+            <div class="mb-6">
+                <label for="level_of_understanding" class="block text-gray-700 font-medium mb-2">Level of Understanding:</label>
+                <select class="select2 border border-gray-300 p-2 rounded w-full" id="level_of_understanding" name="level_of_understanding[]" multiple>
                     <option value="Programming">Programming</option>
                     <option value="Social">Social</option>
                     <option value="Language">Language</option>
                     <!-- Add more options as needed -->
                 </select>
             </div>
-            <div class="form-group">
-                <label for="preferences">Preferences:</label>
-                <!-- Use the "select2" class to enable Select2 -->
-                <select class="form-control select2" id="preferences" name="preferences[]" multiple>
+            <!-- Preferences Field -->
+            <div class="mb-6">
+                <label for="preferences" class="block text-gray-700 font-medium mb-2">Preferences:</label>
+                <select class="select2 border border-gray-300 p-2 rounded w-full" id="preferences" name="preferences[]" multiple>
+                    <!-- Example options, replace with dynamic content in your implementation -->
                     {% for course_name in course_names %}
                     <option value="{{ course_name }}">{{ course_name }}</option>
                     {% endfor %}
+                    <!-- Add more options as needed -->
                 </select>
-                
             </div>
-            <!-- Your existing form fields -->
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Submit</button>
         </form>
     </div>
 
